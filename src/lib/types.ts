@@ -26,14 +26,14 @@ export interface TodoListProps {
   todos: Todo[];
   onToggleComplete: (id: string) => void;
   onDeleteTodo: (id: string) => void;
-  onUpdateTodo: (id: string, newText: string) => void;
+  onUpdateTodo: (id: string, newText: string) => boolean;
 };
 
 export interface TodoItemProps {
   todo: Todo;
   onToggleComplete: (id: string) => void;
   onDeleteTodo: (id: string) => void;
-  onUpdateTodo: (id: string, newText: string) => void;
+  onUpdateTodo: (id: string, newText: string) => boolean;
 };
 
 export interface TodoStatsProps {

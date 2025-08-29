@@ -33,6 +33,6 @@ function FilterControls({ searchTerm, onSearchChange, filter, onFilterChange }: 
       </div>
     </div>
   );
-}
+};
 
 export default FilterControls;

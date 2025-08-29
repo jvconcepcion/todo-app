@@ -27,27 +27,24 @@ export function useTodos() {
     }
   }, [error]);
 
-
-  const addTodo = (text: string) => {
+  const isDuplicateTodo = (text: string, currentId?: string): boolean => {
     // Normalize the input text (case insensitive, trim whitespace)
     const normalizedText = text.trim().toLowerCase();
+    return todos.some(todo =>
+        todo.id !== currentId && // Don't compare a todo to itself when updating
+        todo.text.trim().toLowerCase() === normalizedText
+    );
+  }; 
 
-    // Check for duplicate todo
-    const isDuplicate = todos.some(todo => todo.text.trim().toLowerCase() === normalizedText);
-
-    if (isDuplicate) {
-      setError('Todo already exists!');
+  const addTodo = (text: string) => {
+    if (isDuplicateTodo(text)) {
+      setError('This todo already exists.');
       return;
     }
 
-    // If it's a new todo, clear any previous error and add it
     setError(null);
-    const newTodo: Todo = { 
-      id: crypto.randomUUID(), 
-      text: text.trim(), 
-      completed: false 
-    };
-    setTodos(prevTodos => [...prevTodos, newTodo]);
+    const newTodo: Todo = { id: crypto.randomUUID(), text: text.trim(), completed: false };
+    setTodos((prevTodos) => [...prevTodos, newTodo]);
   };
 
   const toggleComplete = (id: string) => {
@@ -61,9 +58,16 @@ export function useTodos() {
   };
 
   const updateTodo = (id: string, newText: string) => {
+    if (isDuplicateTodo(newText, id)) {
+      setError('Another todo with this name already exists.');
+      return false;
+    }
+
+    setError(null);
     setTodos(todos.map(todo =>
       todo.id === id ? { ...todo, text: newText } : todo
     ));
+    return true;
   };
 
   const clearCompleted = () => {

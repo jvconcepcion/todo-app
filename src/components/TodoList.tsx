@@ -19,6 +19,6 @@ function TodoList({ todos, onToggleComplete, onDeleteTodo, onUpdateTodo }: TodoL
       ))}
     </ul>
   );
-}
+};
 
 export default TodoList;

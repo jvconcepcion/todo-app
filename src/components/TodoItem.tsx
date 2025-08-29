@@ -13,14 +13,32 @@ function TodoItem({ todo, onToggleComplete, onDeleteTodo, onUpdateTodo }: TodoIt
   useEffect(() => {
     if (isEditing) {
       editInputRef.current?.focus();
-    }
+    };
   }, [isEditing]);
 
   const handleUpdate = () => {
-    if (editText.trim()) {
-      onUpdateTodo(todo.id, editText.trim());
+    const trimmedText = editText.trim();
+
+    // If text is empty, revert and exit
+    if (!trimmedText) {
+      setEditText(todo.text);
       setIsEditing(false);
-    }
+      return;
+    };
+
+    // If text hasn't changed, just exit edit mode
+    if (trimmedText === todo.text) {
+      setIsEditing(false);
+      return;
+    };
+
+    // Call onUpdateTodo and check if it was successful
+    const success = onUpdateTodo(todo.id, trimmedText);
+
+    // If it failed due to duplicate issue, revert the local text state
+    if (!success) setEditText(todo.text);
+    
+    setIsEditing(false);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -29,7 +47,7 @@ function TodoItem({ todo, onToggleComplete, onDeleteTodo, onUpdateTodo }: TodoIt
     } else if (e.key === 'Escape') {
       setEditText(todo.text);
       setIsEditing(false);
-    }
+    };
   };
 
   return (
@@ -68,6 +86,6 @@ function TodoItem({ todo, onToggleComplete, onDeleteTodo, onUpdateTodo }: TodoIt
       </div>
     </li>
   );
-}
+};
 
 export default TodoItem;

@@ -16,6 +16,6 @@ function TodoStats({ activeCount, completedCount, onClearCompleted }: TodoStatsP
       )}
     </div>
   );
-}
+};
 
 export default TodoStats;

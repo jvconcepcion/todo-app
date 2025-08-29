@@ -23,6 +23,6 @@ function TodoForm({ onAddTodo }: TodoFormProps) {
       />
     </form>
   );
-}
+};
 
 export default TodoForm;
