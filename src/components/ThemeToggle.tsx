@@ -18,6 +18,6 @@ function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
       )}
     </button>
   );
-}
+};
 
 export default ThemeToggle;

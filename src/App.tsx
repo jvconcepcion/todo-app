@@ -4,7 +4,8 @@ import {
   FilterControls,
   TodoForm,
   TodoList,
-  TodoStats
+  TodoStats,
+  Divider
 } from '@/components';
 
 
@@ -34,18 +35,19 @@ function App() {
           <ThemeToggle theme={theme} onToggle={toggleTheme} />
         </header>
         <main className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl p-6">
-          <TodoForm onAddTodo={addTodo} />
           {error && (
-            <div className="text-red-500 text-xs ml-2 mt-[-1rem] mb-2" role="alert">
+            <div className="text-red-500 text-xs mt-[-.5rem] mb-[1.2rem] text-center" role="alert">
               {error}
             </div>
           )}
+          <TodoForm onAddTodo={addTodo} />
           <FilterControls
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
             filter={filter}
             onFilterChange={setFilter}
           />
+          <Divider />
           <TodoList
             todos={filteredTodos}
             onToggleComplete={toggleComplete}

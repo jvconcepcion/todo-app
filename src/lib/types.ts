@@ -2,6 +2,9 @@ export interface Todo {
   id: string;
   text: string;
   completed: boolean;
+  dateAdded: string;
+  dateCompleted?: string | null;
+  dateModified?: string | null;
 };
 
 export interface ThemeToggleProps {
@@ -26,14 +29,14 @@ export interface TodoListProps {
   todos: Todo[];
   onToggleComplete: (id: string) => void;
   onDeleteTodo: (id: string) => void;
-  onUpdateTodo: (id: string, newText: string) => void;
+  onUpdateTodo: (id: string, newText: string) => boolean;
 };
 
 export interface TodoItemProps {
   todo: Todo;
   onToggleComplete: (id: string) => void;
   onDeleteTodo: (id: string) => void;
-  onUpdateTodo: (id: string, newText: string) => void;
+  onUpdateTodo: (id: string, newText: string) => boolean;
 };
 
 export interface TodoStatsProps {
