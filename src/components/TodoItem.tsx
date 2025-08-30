@@ -1,6 +1,6 @@
 import { useState, KeyboardEvent, useRef, useEffect } from 'react';
 import { TodoItemProps } from '@/lib/types';
-import { 
+import {
   FaEdit,
   FaTrash,
 } from 'react-icons/fa';
@@ -37,7 +37,6 @@ function TodoItem({ todo, onToggleComplete, onDeleteTodo, onUpdateTodo }: TodoIt
 
     // If it failed due to duplicate issue, revert the local text state
     if (!success) setEditText(todo.text);
-    
     setIsEditing(false);
   };
 
@@ -69,16 +68,26 @@ function TodoItem({ todo, onToggleComplete, onDeleteTodo, onUpdateTodo }: TodoIt
           className="flex-grow mx-3 px-2 py-1 border border-blue-300 rounded"
         />
       ) : (
-        <span
-          onDoubleClick={() => setIsEditing(true)}
-          className={`flex-grow mx-3 cursor-pointer ${
-              todo.completed 
-                ? 'line-through text-gray-400 dark:text-gray-500' 
+        <div className="flex-grow mx-3">
+          {/* Title */}
+          <span
+            onDoubleClick={() => setIsEditing(true)}
+            className={`cursor-pointer ${todo.completed
+                ? 'line-through text-gray-400 dark:text-gray-500'
                 : 'text-gray-800 dark:text-gray-200'
-          }`}
-        >
-          {todo.text}
-        </span>
+              }`}
+          >
+            {todo.text}
+          </span>
+          {/* Date Added, modified or  completed*/}
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            {todo.dateCompleted
+              ? `Completed: ${new Date(todo.dateCompleted).toLocaleString()}`
+              : todo.dateModified
+                ? `Modified: ${new Date(todo.dateModified).toLocaleString()}`
+                : `Added: ${new Date(todo.dateAdded).toLocaleString()}`}
+          </p>
+        </div>
       )}
       <div className="space-x-2 ml-auto">
         <button onClick={() => setIsEditing(true)} className="text-blue-500 hover:text-blue-700"><FaEdit /></button>

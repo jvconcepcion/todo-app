@@ -4,7 +4,8 @@ import {
   FilterControls,
   TodoForm,
   TodoList,
-  TodoStats
+  TodoStats,
+  Divider
 } from '@/components';
 
 
@@ -46,6 +47,7 @@ function App() {
             filter={filter}
             onFilterChange={setFilter}
           />
+          <Divider />
           <TodoList
             todos={filteredTodos}
             onToggleComplete={toggleComplete}

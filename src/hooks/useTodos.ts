@@ -43,13 +43,27 @@ export function useTodos() {
     }
 
     setError(null);
-    const newTodo: Todo = { id: crypto.randomUUID(), text: text.trim(), completed: false };
+    const newTodo: Todo = {
+      id: crypto.randomUUID(),
+      text: text.trim(),
+      completed: false,
+      dateAdded: new Date().toISOString(),
+      dateCompleted: null,
+      dateModified: null,
+    };
     setTodos((prevTodos) => [...prevTodos, newTodo]);
   };
 
   const toggleComplete = (id: string) => {
     setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      todo.id === id
+        ? {
+          ...todo,
+          completed: !todo.completed,
+          dateCompleted: !todo.completed ? new Date().toISOString() : null,
+          dateModified: new Date().toISOString(),
+        }
+        : todo
     ));
   };
 
@@ -64,16 +78,24 @@ export function useTodos() {
     }
 
     setError(null);
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, text: newText } : todo
-    ));
+    setTodos(
+      todos.map(todo =>
+        todo.id === id
+          ? {
+            ...todo,
+            text: newText.trim(),
+            dateModified: new Date().toISOString(),
+          }
+          : todo
+      )
+    );
     return true;
   };
 
   const clearCompleted = () => {
     setTodos(todos.filter(todo => !todo.completed));
   };
-  
+
   // Memoized calculation for filtering and searching todos
   // Search Functionality and Filter Functionality
   const filteredTodos = useMemo(() => {

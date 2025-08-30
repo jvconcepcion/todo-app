@@ -2,6 +2,9 @@ export interface Todo {
   id: string;
   text: string;
   completed: boolean;
+  dateAdded: string;
+  dateCompleted?: string | null;
+  dateModified?: string | null;
 };
 
 export interface ThemeToggleProps {

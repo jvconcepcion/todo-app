@@ -14,7 +14,7 @@ function FilterControls({ searchTerm, onSearchChange, filter, onFilterChange }: 
         placeholder="Search by name..."
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}
-        className="w-full sm:w-1/2 px-3 py-2 border border-gray-400 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 transition"
+        className="w-full sm:w-1/2 px-3 py-2 input"
       />
       <div className="flex space-x-2">
         {filterButtons.map(btn => (
