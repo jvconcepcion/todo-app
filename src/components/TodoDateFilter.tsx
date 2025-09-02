@@ -1,8 +1,7 @@
 import React from 'react';
-import { useTodos } from '@/hooks/useTodos';
+import { TodoDateFilterProps } from '@/lib/types';
 
-function TodoDateFilter() {
-  const { dateFilter, setDateFilter } = useTodos();
+function TodoDateFilter({ dateFilter, setDateFilter} : TodoDateFilterProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const dateValue = e.target.value;

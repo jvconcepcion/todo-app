@@ -14,6 +14,7 @@ function App() {
   const [theme, toggleTheme] = useTheme();
   const {
     filter,
+    dateFilter,
     searchTerm,
     activeCount,
     completedCount,
@@ -27,6 +28,7 @@ function App() {
     clearCompleted,
     setFilter,
     setSearchTerm,
+    setDateFilter,
     currentTodos,
     currentPage,
     totalPages,
@@ -53,6 +55,8 @@ function App() {
             onSearchChange={setSearchTerm}
             filter={filter}
             onFilterChange={setFilter}
+            dateFilter={dateFilter}
+            setDateFilter={setDateFilter}
           />
           <Divider />
           <TodoList

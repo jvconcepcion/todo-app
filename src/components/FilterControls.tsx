@@ -1,7 +1,14 @@
 import { FilterControlsProps } from '@/lib/types';
 import TodoDateFilter from './TodoDateFilter';
 
-function FilterControls({ searchTerm, onSearchChange, filter, onFilterChange }: FilterControlsProps) {
+function FilterControls({ 
+  searchTerm, 
+  onSearchChange, 
+  filter, 
+  onFilterChange,
+  dateFilter,
+  setDateFilter,
+}: FilterControlsProps) {
   const filterButtons = [
     { value: 'all', label: 'All' },
     { value: 'active', label: 'Active' },
@@ -33,7 +40,7 @@ function FilterControls({ searchTerm, onSearchChange, filter, onFilterChange }: 
           ))}
         </div>
       </div>
-        <TodoDateFilter />
+        <TodoDateFilter dateFilter={dateFilter} setDateFilter={setDateFilter} />
     </div>
   );
 };

@@ -18,7 +18,12 @@ export interface TodoFormProps {
   onAddTodo: (text: string) => void;
 };
 
-export interface FilterControlsProps {
+export interface TodoDateFilterProps {
+  dateFilter: Date | null;
+  setDateFilter: (value: Date | null) => void;
+};
+
+export interface FilterControlsProps extends TodoDateFilterProps {
   searchTerm: string;
   onSearchChange: (term: string) => void;
   filter: 'all' | 'active' | 'completed';
