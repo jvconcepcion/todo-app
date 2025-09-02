@@ -1,4 +1,5 @@
 import { FilterControlsProps } from '@/lib/types';
+import TodoDateFilter from './TodoDateFilter';
 
 function FilterControls({ searchTerm, onSearchChange, filter, onFilterChange }: FilterControlsProps) {
   const filterButtons = [
@@ -8,29 +9,31 @@ function FilterControls({ searchTerm, onSearchChange, filter, onFilterChange }: 
   ] as const;
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
-      <input
-        type="text"
-        placeholder="Search by name..."
-        value={searchTerm}
-        onChange={(e) => onSearchChange(e.target.value)}
-        className="w-full sm:w-1/2 px-3 py-2 input"
-      />
-      <div className="flex space-x-2">
-        {filterButtons.map(btn => (
-          <button
-            key={btn.value}
-            onClick={() => onFilterChange(btn.value)}
-            className={`px-4 py-2 text-sm font-medium rounded-lg transition ${
-              filter === btn.value
-                ? 'bg-blue-600 text-white shadow'
-                : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-500'
-            }`}
-          >
-            {btn.label}
-          </button>
-        ))}
+    <div className='flex flex-col w-full'>
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchTerm}
+          onChange={(e) => onSearchChange(e.target.value)}
+          className="w-full sm:w-1/2 px-3 py-2 input"
+        />
+        <div className="flex space-x-2">
+          {filterButtons.map(btn => (
+            <button
+              key={btn.value}
+              onClick={() => onFilterChange(btn.value)}
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition ${filter === btn.value
+                  ? 'bg-blue-600 text-white shadow'
+                  : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-500'
+                }`}
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
       </div>
+        <TodoDateFilter />
     </div>
   );
 };

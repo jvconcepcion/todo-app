@@ -5,6 +5,7 @@ import TodoList from './TodoList';
 import TodoStats from './TodoStats';
 import FilterControls from './FilterControls';
 import Divider from './Divider';
+import TodoDateFilter from './TodoDateFilter';
 
 export {
   ThemeToggle,
@@ -14,4 +15,5 @@ export {
   TodoStats,
   FilterControls,
   Divider,
+  TodoDateFilter,
 };

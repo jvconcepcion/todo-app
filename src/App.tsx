@@ -5,14 +5,14 @@ import {
   TodoForm,
   TodoList,
   TodoStats,
-  Divider
+  Divider,
+  TodoDateFilter,
 } from '@/components';
 
 
 function App() {
   const [theme, toggleTheme] = useTheme();
   const {
-    filteredTodos,
     filter,
     searchTerm,
     activeCount,
@@ -21,10 +21,17 @@ function App() {
     addTodo,
     toggleComplete,
     deleteTodo,
+    undoDelete,
+    todoToDelete,
     updateTodo,
     clearCompleted,
     setFilter,
     setSearchTerm,
+    currentTodos,
+    currentPage,
+    totalPages,
+    nextPage,
+    prevPage,
   } = useTodos();
 
   return (
@@ -49,18 +56,44 @@ function App() {
           />
           <Divider />
           <TodoList
-            todos={filteredTodos}
+            todos={currentTodos}
             onToggleComplete={toggleComplete}
             onDeleteTodo={deleteTodo}
             onUpdateTodo={updateTodo}
           />
-          <TodoStats 
+          <TodoStats
             activeCount={activeCount}
             completedCount={completedCount}
             onClearCompleted={clearCompleted}
           />
+          <div className='flex justify-center items-center mt-4 gap-2'>
+            <button onClick={prevPage} disabled={currentPage === 1} className='text-xs'>
+              Previous
+            </button>
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button onClick={nextPage} disabled={currentPage === totalPages} className='text-xs'>
+              Next
+            </button>
+          </div>
         </main>
       </div>
+
+      {/* Undo Delete Notification */}
+      {todoToDelete && (
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-gray-800 text-white py-3 px-5 rounded-lg shadow-lg flex items-center justify-between animate-fade-in-up">
+          <span className="mr-4">
+            Todo "{todoToDelete.text}" deleted.
+          </span>
+          <button
+            onClick={undoDelete}
+            className="font-bold text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            Undo
+          </button>
+        </div>
+      )}
     </div>
   )
 };
